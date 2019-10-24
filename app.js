@@ -69,7 +69,11 @@ pmx.initModule({
 
       switch(type){
         case 'err':
-            let imgBuf = text2png(info.data || '未知错误');
+            let imgBuf = text2png(info.data || '未知错误', {
+              font: '22px wenquanyi',
+              localFontPath: 'fonts/wenquanyi-mi.ttf',
+              localFontName: 'wenquanyi'
+            });
             wxwork.send({isAll: false, img: imgBuf});
           break;
       }
