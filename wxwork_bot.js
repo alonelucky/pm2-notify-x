@@ -5,8 +5,6 @@ const {md5} = require('./lib');
 const baseUrl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=';
 
 class WxWorkBot{
-    splitChar;
-    keys;
     constructor(conf){
         this.splitChar = conf.splitChar || ',';
         this.keys = conf.wxworkBotKeys.split(this.splitChar);

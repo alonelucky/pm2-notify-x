@@ -1,6 +1,6 @@
 {
   "name": "pm2-notify-x",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PM2 notify module",
   "main": "app.js",
   "dependencies": {
