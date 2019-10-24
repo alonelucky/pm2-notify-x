@@ -21,3 +21,10 @@ pm2 set pm2-notify-x:splitChar ,
 [] 自定义提醒url
 [] 自定义请求模板
 [] 自定义提醒错误类型
+
+### 3. 常见问题
+
+1. 中文展示
+linux服务器上默认的字符集是`en_US.utf8`, 因此输出文字中包含中文,则展示未乱码, 参照如下文章配置中文
+
+[linux服务器默认使用中文字符集zh_CN.UTF-8](https://www.cnblogs.com/xuanbjut/p/11578154.html)
