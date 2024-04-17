@@ -1,36 +1,41 @@
 const axios = require('axios');
-
-const {md5} = require('./lib');
-
 const baseUrl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=';
 
-class WxWorkBot{
-    constructor(conf){
-        this.splitChar = conf.splitChar || ',';
-        this.keys = conf.wxworkBotKeys.split(this.splitChar);
+class WxWorkBot {
+    constructor(conf) {
+        this.keys = conf.wewrokkeys.split(',');
     }
 
-    send(params){
-        for(let key of this.keys) {
-            sendMsg(key, params).then(data=>{
-                    console.log(data.data);
-                }).catch(err=>{
-                    console.error(err);
-                });
+    send(params) {
+        for (let key of this.keys) {
+            sendMsg(key, params).then(data => {
+                console.log(data.data);
+            }).catch(err => {
+                console.error(err);
+            });
         }
     }
 }
 
 // 发送机器人消息
-function sendMsg(key, params){
-    let list = params.isAll ? ['@all'] : [];
+/**
+ * 
+ * @param {*} key 
+ * @param {object} params 
+ * @param {String} params.name
+ * @param {Number} params.id
+ * @param {String} params.time
+ * @param {String} params.msg
+ * @returns 
+ */
+function sendMsg(key, params) {
     return axios.post(`${baseUrl}${key}`, {
-        msgtype: 'image',
-        image: {
-            base64: params.img.toString('base64'),
-            md5: md5(params.img)
+        msgtype: 'markdown',
+        markdown: {
+            content: `**进程名: ${params.name} ${params.id}**
+<font color="comment">${params.time}</font>
+> ${params.msg}`
         },
-        mentioned_list: list,
     });
 }
 

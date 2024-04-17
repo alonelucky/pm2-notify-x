@@ -7,8 +7,7 @@
     "axios": "^0.19.0",
     "dayjs": "^1.8.16",
     "pm2": "^4.1.2",
-    "pmx": "beta",
-    "text2png": "^2.3.0"
+    "pmx": "beta"
   },
   "repository": {
     "type": "git",

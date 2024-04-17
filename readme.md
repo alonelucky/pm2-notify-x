@@ -7,10 +7,8 @@
 ```
 # 安装并启动模块
 pm2 install pm2-notify-x
-# 配置机器人key
-pm2 set pm2-notify-x:wxworkBotKeys yourbotkey
-# 配置多个机器人Key分隔符, 默认值 `,`
-pm2 set pm2-notify-x:splitChar ,
+# 配置机器人key,英文逗号分割，可以同时通知多个机器人
+pm2 set pm2-notify-x:wewrokkeys yourbotkey
 ```
 
 ### 2. 项目后期
