@@ -2,7 +2,9 @@ const pm2 = require('pm2');
 const pmx = require('pmx');
 const dayjs = require('dayjs');
 const WxWorkBot = require('./wxwork_bot');
+const { md5 } = require('./lib');
 
+const cache = {}
 let currentPmID = -1;
 /**
  *           Module Entry Point
@@ -44,6 +46,7 @@ pmx.initModule({
   if (err) throw err;
   console.log(conf);
   let wxwork = new WxWorkBot(conf);
+  const delay = Number(conf.delay) || 15;
   // 获取当前进程pm_id
   pm2.list((err, list) => {
     if (err) throw err;
@@ -62,12 +65,20 @@ pmx.initModule({
 
       switch (type) {
         case 'err':
-          wxwork.send({
+          let key = md5(info.process.name + JSON.stringify(info.data))
+          if (cache[key]) return cache[key].times += 1;
+          cache[key] = {
             name: info.process.name,
             id: info.process.pm_id,
             time: dayjs(info.at).format('YYYY-MM-DD HH:mm:ss'),
-            msg: info.data
-          });
+            msg: info.data,
+            times: 1,
+            delay,
+          };
+          setTimeout(() => {
+            wxwork.send(cache[key]);
+            cache[key] = undefined;
+          }, delay * 1000)
           break;
       }
     })
@@ -76,3 +87,6 @@ pmx.initModule({
   // 保证进程挂起,不退出
   setInterval(function () { }, 3000);
 });
+
+
+

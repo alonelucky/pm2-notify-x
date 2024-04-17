@@ -7,8 +7,10 @@
 ```
 # 安装并启动模块
 pm2 install pm2-notify-x
+# 合并通知间隔: 单位秒, 默认 15s
+pm2 set pm2-notify-x:delay  15s
 # 配置机器人key,英文逗号分割，可以同时通知多个机器人
-pm2 set pm2-notify-x:wewrokkeys yourbotkey
+pm2 set pm2-notify-x:weworkkeys yourbotkey
 ```
 
 ### 2. 项目后期

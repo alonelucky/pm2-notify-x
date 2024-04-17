@@ -3,7 +3,7 @@ const baseUrl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=';
 
 class WxWorkBot {
     constructor(conf) {
-        this.keys = conf.wewrokkeys.split(',');
+        this.keys = conf.weworkkeys?.split(',') ?? [];
     }
 
     send(params) {
@@ -26,6 +26,8 @@ class WxWorkBot {
  * @param {Number} params.id
  * @param {String} params.time
  * @param {String} params.msg
+ * @param {String} params.times 单位时间内触发次数
+ * @param {String} params.delay 延迟触发间隔
  * @returns 
  */
 function sendMsg(key, params) {
@@ -33,7 +35,7 @@ function sendMsg(key, params) {
         msgtype: 'markdown',
         markdown: {
             content: `**进程名: ${params.name} ${params.id}**
-<font color="comment">${params.time}</font>
+<font color="comment">${params.time} (${params.delay}秒发生${params.times}次)</font>
 > ${params.msg}`
         },
     });
