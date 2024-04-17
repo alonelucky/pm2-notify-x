@@ -2,6 +2,7 @@ const pm2 = require('pm2');
 const pmx = require('pmx');
 const dayjs = require('dayjs');
 const WxWorkBot = require('./wxwork_bot');
+const Bark = require('./bark');
 const { md5 } = require('./lib');
 
 const cache = {}
@@ -45,7 +46,8 @@ pmx.initModule({
 }, function (err, conf) {
   if (err) throw err;
   console.log(conf);
-  let wxwork = new WxWorkBot(conf);
+  const wxwork = new WxWorkBot(conf);
+  const bark = new Bark(conf);
   const delay = Number(conf.delay) || 15;
   // 获取当前进程pm_id
   pm2.list((err, list) => {
@@ -77,6 +79,7 @@ pmx.initModule({
           };
           setTimeout(() => {
             wxwork.send(cache[key]);
+            bark.send(cache[key]);
             cache[key] = undefined;
           }, delay * 1000)
           break;
