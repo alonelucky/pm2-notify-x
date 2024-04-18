@@ -16,21 +16,21 @@ global.debug = false;
 module.exports = function (conf) {
     global.debug = conf.module_conf.debug;
     if (global.debug) console.log(conf.module_conf)
-    const wxworks = conf?.module_conf?.wxwork?.split(',') ?? [];
-    const barks = conf?.module_conf?.bark?.split(',') ?? [];
+    const wxworks = conf.module_conf.wxwork.split(',') || [];
+    const barks = conf.module_conf.bark.split(',') || [];
     const pmnamewxworks = {};
     const pmnamebarks = {};
-    for (let key in (conf?.module_conf ?? {})) {
+    for (let key in (conf.module_conf || {})) {
         var keys = key.split('_');
         if (keys.length === 1) continue;
         var k = keys.slice(0, keys.length - 1).join('_');
         if (keys[keys.length - 1] === 'wxwork') {
-            pmnamewxworks[k] = [...(pmnamewxworks[k] ?? []), conf?.module_conf[key]]
+            pmnamewxworks[k] = [...(pmnamewxworks[k] || []), conf.module_conf[key]]
             continue
         }
 
         if (keys[keys.length - 1] === 'bark') {
-            pmnamebarks[k] = [...(pmnamebarks[k] ?? []), conf?.module_conf[key]]
+            pmnamebarks[k] = [...(pmnamebarks[k] || []), conf.module_conf[key]]
             continue
         }
     }
