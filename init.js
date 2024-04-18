@@ -14,10 +14,11 @@ global.debug = false;
  * @param {object} conf.module_conf
  */
 module.exports = function (conf) {
-    global.debug = conf.module_conf.debug;
+    global.debug = conf.module_conf.debug || false;
     if (global.debug) console.log(conf.module_conf)
-    const wxworks = conf.module_conf.wxwork.split(',') || [];
-    const barks = conf.module_conf.bark.split(',') || [];
+    const delay = Number(conf.module_conf.delay) || 15;
+    const wxworks = (conf.module_conf.wxwork || '').split(',') || [];
+    const barks = (conf.module_conf.bark || '').split(',') || [];
     const pmnamewxworks = {};
     const pmnamebarks = {};
     for (let key in (conf.module_conf || {})) {
@@ -36,7 +37,6 @@ module.exports = function (conf) {
     }
 
     if (global.debug) console.log({ pmnamebarks, pmnamewxworks, wxworks, barks })
-    const delay = Number(conf.delay) || 15;
     // 获取当前进程pm_id
     pm2.list((err, list) => {
         if (err) throw err;
