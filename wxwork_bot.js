@@ -15,8 +15,10 @@ const baseUrl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=';
  * @returns 
  */
 module.exports = function send(keys, params) {
+    if (global.debug) console.log('企微待发送', keys)
     for (const key of keys) {
-        axios.post(`${baseUrl}${key}`, {
+        if (!key) continue
+        axios.post(baseUrl + key, {
             msgtype: 'markdown',
             markdown: {
                 content: `**进程名: ${params.name} ${params.id}**

@@ -12,7 +12,9 @@ const axios = require('axios');
  * @returns 
  */
 module.exports = function send(urls, params) {
+    if (global.debug) console.log('Bark待发送', urls)
     for (const url of urls) {
+        if (!url) continue
         axios.post(url, {
             body: params.msg,
             title: `进程: ${params.name} ${params.id}(${params.delay}秒发生${params.times}次)`,

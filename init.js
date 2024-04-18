@@ -6,6 +6,7 @@ const { md5 } = require('./lib');
 
 const cache = {}
 let currentPmID = -1;
+global.debug = false;
 
 /**
  * 入口
@@ -13,9 +14,10 @@ let currentPmID = -1;
  * @param {object} conf.module_conf
  */
 module.exports = function (conf) {
-    console.log(conf.module_conf)
-    const wxworks = conf?.module_conf?.wxwork ?? [];
-    const barks = conf?.module_conf?.bark ?? [];
+    global.debug = conf.module_conf.debug;
+    if (global.debug) console.log(conf.module_conf)
+    const wxworks = conf?.module_conf?.wxwork?.split(',') ?? [];
+    const barks = conf?.module_conf?.bark?.split(',') ?? [];
     const pmnamewxworks = {};
     const pmnamebarks = {};
     for (let key in (conf?.module_conf ?? {})) {
@@ -33,7 +35,7 @@ module.exports = function (conf) {
         }
     }
 
-    console.log(pmnamebarks, pmnamewxworks)
+    if (global.debug) console.log({ pmnamebarks, pmnamewxworks, wxworks, barks })
     const delay = Number(conf.delay) || 15;
     // 获取当前进程pm_id
     pm2.list((err, list) => {
