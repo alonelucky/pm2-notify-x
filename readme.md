@@ -14,7 +14,16 @@ pm2 set pm2-notify-x:wxwork yourbotkey
 # 配置机器人key,英文逗号分割，可以同时通知多个Bark终端 https://api.day.app/yourkey
 pm2 set pm2-notify-x:bark yoururl
 # 配置前增加 pm2 进程名称，可以为进程单独设置配置,例如: pname = your_name, configkey = your_name_bark
-pm2 set pm2-notify-x: your_pname_bark yoururl
+pm2 set pm2-notify-x:your_pname_bark yoururl
+
+# 增加 jsonpath 查找，查找规则 https://radash-docs.vercel.app/docs/object/get，查不到依然通知，只不过通知的是消息整体
+pm2 set pm2-notify-x:find $.msg
+# 增加正则查找，正则支持 正则表达式及字符串, 正则表达式匹配不到的消息不进行通知
+pm2 set pm2-notify-x:find /"msg":/ig // will eval('/"msg":/ig')
+pm2 set pm2-notify-x:find "msg":   // will new Regexp('"msg":')
+
+# 同时支持进程名称前缀设置指定进程规则
+pm2 set pm2-notify-x:your_pname_find $.msg
 ```
 
 ### 2. 项目后期
@@ -22,12 +31,6 @@ pm2 set pm2-notify-x: your_pname_bark yoururl
 [x] 企业微信
 [x] Bark通知
 [x] 按进程区分通知
+[x] 增加消息规则匹配
 [] 邮件通知
 [] 对接tg
-
-### 3. 常见问题
-
-1. 中文展示
-linux服务器上默认的字符集是`en_US.utf8`, 因此输出文字中包含中文,则展示未乱码, 参照如下文章配置中文
-
-[linux服务器默认使用中文字符集zh_CN.UTF-8](https://www.cnblogs.com/xuanbjut/p/11578154.html)
