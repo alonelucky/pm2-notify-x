@@ -11,7 +11,7 @@ pm2 install pm2-notify-x
 pm2 set pm2-notify-x:delay  15s
 # 配置机器人key,英文逗号分割，可以同时通知多个机器人
 pm2 set pm2-notify-x:weworkkeys yourbotkey
-# 配置机器人key,英文逗号分割，可以同时通知多个Bark终端，特定参数 TITLE, CONTENT: https://api.day.app/yourkey/TITLE/CONTENT
+# 配置机器人key,英文逗号分割，可以同时通知多个Bark终端 https://api.day.app/yourkey
 pm2 set pm2-notify-x:barkurls yoururl
 ```
 

@@ -1,5 +1,4 @@
 const axios = require('axios');
-const baseUrl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=';
 
 class Bark {
     constructor(conf) {
@@ -31,7 +30,10 @@ class Bark {
  * @returns 
  */
 function sendMsg(url, params) {
-    return axios.get(url.replace('TITLE', encodeURIComponent(`进程: ${params.name} ${params.id}(${params.delay}秒发生${params.times}次)`)).replace('CONTENT', encodeURIComponent(params.msg)));
+    return axios.post(url, {
+        body: params.msg,
+        title: `进程: ${params.name} ${params.id}(${params.delay}秒发生${params.times}次)`,
+    });
 }
 
 module.exports = Bark;
