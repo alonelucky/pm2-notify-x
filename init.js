@@ -66,8 +66,8 @@ module.exports = function (conf) {
                         delay,
                     };
                     setTimeout(() => {
-                        wxwork([...(pmnamewxworks[info.process.name] ?? []), ...wxworks], cache[key]);
-                        bark([...(pmnamebarks[info.process.name] ?? []), ...barks], cache[key]);
+                        wxwork([...(pmnamewxworks[info.process.name] || []), ...wxworks], cache[key]);
+                        bark([...(pmnamebarks[info.process.name] || []), ...barks], cache[key]);
                         cache[key] = undefined;
                     }, delay * 1000)
                     break;
