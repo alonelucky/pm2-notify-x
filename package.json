@@ -14,8 +14,9 @@
     "url": "https://github.com/xiaqiubo/pm2-notify-x.git"
   },
   "config": {
-    "wxworkBotKeys": "",
-    "splitChar": ","
+    "wxwork": "",
+    "bark": "",
+    "delay": 15
   },
   "apps": [
     {
