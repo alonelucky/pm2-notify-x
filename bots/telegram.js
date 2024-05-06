@@ -13,17 +13,15 @@ const axios = require('axios');
  * @returns 
  */
 module.exports = function send(urls, params) {
-    if (global.debug) console.log('钉钉待发送', urls)
+    if (global.debug) console.log('Telegram 待发送', urls)
     const title = `进程: ${params.name} ${params.id}(${params.delay}秒发生${params.times}次)`
     for (const url of urls) {
         if (!url) continue
         const u = new URL(url);
         axios.post(url, {
-            msgtype: 'markdown',
-            markdown: {
-                title,
-                text: `**${title}**\n> ${params.msg}`
-            }
+            chat_id: u.searchParams.get('chat_id'),
+            text: `<b>${title}</b>\n<pre><code>${params.msg}</code></pre>`,
+            parse_mode: 'HTML'
         }).catch(console.error)
     }
 }
