@@ -21,7 +21,7 @@ module.exports = function send(urls, params) {
         const u = new URL(url);
         axios.post(url, {
             chat_id: u.searchParams.get('chat_id'),
-            text: `<b>${title}</b>\n<pre><code>${params.msg}</code></pre>`,
+            text: `<b>${title}</b>\n<pre><code>${params.msg.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/&/g, '&amp;')}</code></pre>`,
             parse_mode: 'HTML'
         }).catch(console.error)
     }
