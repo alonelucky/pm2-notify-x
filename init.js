@@ -3,6 +3,10 @@ const dayjs = require('dayjs');
 const { get } = require('radash');
 const wxwork = require('./bots/wxwork_bot');
 const bark = require('./bots/bark');
+const dingtalk = require('./bots/dingtalk');
+const flybook = require('./bots/flybook');
+const slack = require('./bots/slack');
+const telegram = require('./bots/telegram');
 const { md5 } = require('./lib');
 
 const cache = {}
@@ -77,6 +81,10 @@ module.exports = function (conf) {
             setTimeout(() => {
                 wxwork([...(pmnamewxworks[info.process.name] || []), ...wxworks], cache[key]);
                 bark([...(pmnamebarks[info.process.name] || []), ...barks], cache[key]);
+                dingtalk([...(pmnamebarks[info.process.name] || []), ...barks], cache[key]);
+                flybook([...(pmnamebarks[info.process.name] || []), ...barks], cache[key]);
+                slack([...(pmnamebarks[info.process.name] || []), ...barks], cache[key]);
+                telegram([...(pmnamebarks[info.process.name] || []), ...barks], cache[key]);
                 cache[key] = undefined;
             }, delay * 1000)
         })
