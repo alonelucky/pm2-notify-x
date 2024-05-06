@@ -1,8 +1,8 @@
 const pm2 = require('pm2');
 const dayjs = require('dayjs');
 const { get } = require('radash');
-const wxwork = require('./wxwork_bot');
-const bark = require('./bark');
+const wxwork = require('./bots/wxwork_bot');
+const bark = require('./bots/bark');
 const { md5 } = require('./lib');
 
 const cache = {}
