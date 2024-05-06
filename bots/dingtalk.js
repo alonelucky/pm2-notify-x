@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+// https://open.dingtalk.com/document/orgapp/custom-bot-send-message-type#
+
 /**
  * 
  * @param {Array<String>} urls 

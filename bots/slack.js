@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+// https://api.slack.com/reference/surfaces/formatting#attachments
 /**
  * 
  * @param {Array<String>} urls 

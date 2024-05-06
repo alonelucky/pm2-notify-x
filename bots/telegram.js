@@ -1,5 +1,6 @@
 const axios = require('axios');
 
+// https://core.telegram.org/bots/api#formatting-options
 /**
  * 
  * @param {Array<String>} urls 

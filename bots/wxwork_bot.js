@@ -1,6 +1,7 @@
 const axios = require('axios');
 const baseUrl = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=';
 
+// https://developer.work.weixin.qq.com/document/path/91770
 // 发送机器人消息
 /**
  * 

@@ -1,4 +1,7 @@
 const axios = require('axios');
+
+// https://bark.day.app/#/tutorial?id=url%e6%a0%bc%e5%bc%8f
+
 /**
  * 
  * @param {Array<String>} urls 

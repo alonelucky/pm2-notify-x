@@ -1,5 +1,7 @@
 const axios = require('axios');
 
+// https://open.feishu.cn/document/common-capabilities/message-card/message-cards-content/card-structure/card-content
+// https://open.feishu.cn/document/common-capabilities/message-card/message-cards-content/using-markdown-tags
 /**
  * 
  * @param {Array<String>} urls 
