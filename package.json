@@ -1,6 +1,6 @@
 {
   "name": "pm2-notify-x",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "PM2 notify module",
   "main": "app.js",
   "dependencies": {
@@ -21,9 +21,15 @@
     "feishu",
     "bark"
   ],
+  "files": [
+    "app.js",
+    "init.js",
+    "lib.js",
+    "bots/*.js"
+  ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaqiubo/pm2-notify-x.git"
+    "url": "https://github.com/alonelucky/pm2-notify-x.git"
   },
   "config": {
     "telegram": "",
