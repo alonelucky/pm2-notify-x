@@ -7,6 +7,7 @@ const dingtalk = require('./bots/dingtalk');
 const flybook = require('./bots/flybook');
 const slack = require('./bots/slack');
 const telegram = require('./bots/telegram');
+const email = require('./bots/email');
 const { md5 } = require('./lib');
 
 const cache = {}
@@ -62,6 +63,7 @@ module.exports = function (conf) {
                 flybook(botCofnig.get(info.process.name, 'feishu'), cache[key]);
                 slack(botCofnig.get(info.process.name, 'slack'), cache[key]);
                 telegram(botCofnig.get(info.process.name, 'telegram'), cache[key]);
+                email(conf.smtp, botCofnig.get(info.process.name, 'email'), cache[key]);
                 cache[key] = undefined;
             }, delay * 1000)
         })
@@ -106,11 +108,12 @@ class ModelConfig {
     find;
     conf = {};
     data = {};
-    types = ['wxwork', 'bark', 'slack', 'feishu', 'dingtalk', 'telegram'];
+    types = ['wxwork', 'bark', 'slack', 'feishu', 'dingtalk', 'telegram', 'email'];
     constructor(conf) {
         this.conf = conf || {};
-        this.data.wxwork = (conf.wxwork || '').split(',') || [];
-        this.data.bark = (conf.bark || '').split(',') || [];
+        for (let k of this.types) {
+            this.data[k] = (conf[k] || '').split(',').filter(v => v) || [];
+        }
         this.find = parseFind(conf.find);
         this._getAll();
     }
